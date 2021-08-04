@@ -31,4 +31,10 @@ class PrimeCounterControllerTest {
     public void whenLimitNullThenTrowInvalid() {
         assertThrows(ConstraintViolationException.class, () -> primeCounterController.getPrimeByLimit(null));
     }
+
+    @Test
+    public void whenLimit0ThenReturn404() {
+        var response = primeCounterController.getPrimeByLimit(0);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
 }

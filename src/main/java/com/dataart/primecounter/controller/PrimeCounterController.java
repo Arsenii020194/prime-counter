@@ -23,6 +23,10 @@ public class PrimeCounterController {
             value = "Get all prime numbers up to limit."
     )
     public ResponseEntity<Object> getPrimeByLimit(@ApiParam(name = "limit", required = true) @NotNull Integer limit) {
-        return ResponseEntity.ok(primeCounterService.getPrimeByLimit(limit));
+        var result = primeCounterService.getPrimeByLimit(limit);
+        if (result.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(result);
     }
 }
